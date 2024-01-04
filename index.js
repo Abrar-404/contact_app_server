@@ -42,11 +42,22 @@ async function run() {
     // users, admin and moderator related
     const contactCollection = client.db('contactAll').collection('contact');
 
+    app.get('/addContact', async (req, res) => {
+      const result = await contactCollection.find().toArray();
+      res.send(result);
+    });
+
+     app.get('/addContact/:id', async (req, res) => {
+       const id = req.params.id;
+       const query = { _id: new ObjectId(id) };
+       const result = await contactCollection.findOne(query);
+       res.send(result);
+     });
 
     app.post('/addContact', async (req, res) => {
       const data = req.body;
       const result = await contactCollection.insertOne(data);
-      res.send(result);
+      // res.send(result);
     });
 
     // Send a ping to confirm a successful connection
