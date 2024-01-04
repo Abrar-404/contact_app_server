@@ -57,7 +57,7 @@ async function run() {
     app.post('/addContact', async (req, res) => {
       const data = req.body;
       const result = await contactCollection.insertOne(data);
-      // res.send(result);
+      res.send(result);
     });
 
     // Send a ping to confirm a successful connection
