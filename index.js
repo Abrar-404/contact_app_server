@@ -47,6 +47,11 @@ async function run() {
       res.send(result);
     });
 
+    app.get('/favorites', async (req, res) => {
+      const result = await contactCollection.find().toArray();
+      res.send(result);
+    });
+
     app.get('/addContact/:id', async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
